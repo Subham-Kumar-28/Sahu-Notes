@@ -1,0 +1,70 @@
+git# Dependencies
+node_modules/
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Database (local SQLite) — on Render it's ephemeral; production uses Supabase
+*.db
+notes-app.db
+
+# Local uploads (production uses Supabase Storage)
+uploads/*
+!uploads/.gitkeep
+
+# Logs & temp
+*.log
+*.o
+*.exe
+temp.bin
+output.txt
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# ===== Old / unrelated files (student management C++ etc.) =====
+*.class
+*.cpp
+*.ino
+*.bin
+stu.bin
+stubin.bin
+temp.bin
+tempCodeRunnerFile.cpp
+main.cpp
+stu_mng_sys.cpp
+stu.cpp
+student.cpp
+stu_mng_sys.o
+stu.o
+student.o
+stu_mng_sys.exe
+stu.exe
+Student_management_system.exe
+Receiver.java
+Sender.java
+Receiver.class
+Sender.class
+report.docx
+sketch_mar14a/
+student.html
+socialapps.html
+stu_mng_sys.exe
+stu_mng_sys.o
+stu.cpp
+stu.exe
+
+# ===== VSCode backup / "Copy" files =====
+*.bak
+* - Copy.*
+* - Copy - Copy.*
+* (2).*
+* (3).*
+* (4).*
+
+# VSCode settings (keep if you want them; otherwise ignore)
+.vscode/
+

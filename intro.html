@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#1a2a6c">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="SahuNotes">
+    <meta name="description" content="SahuNotes — handwritten study notes by Subham Sahu — BCA, BSc AI&ML, BCS, IT.">
+<link rel="manifest" href="/manifest.json">
+    <link rel="icon" type="image/png" href="/public/icons/icon-192.png">
+    <link rel="apple-touch-icon" href="/public/icons/icon-192.png">
+    <title>SahuNotes — Subham Sahu</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="/public/app.css">
+</head>
+<body>
+
+    <!-- ===== Header ===== -->
+    <header class="app-header">
+        <div class="top-row">
+            <div class="logo"><i class="fas fa-user-graduate"></i></div>
+            <div>
+                <h1>SahuNotes</h1>
+                <div class="subtitle">Subham Sahu · Study Hub</div>
+            </div>
+            <div class="header-actions" id="headerActions" style="display:none;">
+                <button class="btn btn-sm btn-outline" id="logoutBtn" style="border-color:rgba(255,255,255,0.4);color:#fff;background:rgba(255,255,255,0.1);"><i class="fas fa-sign-out-alt"></i> Logout</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== LOGIN SCREEN ===== -->
+    <section class="screen active" id="loginScreen">
+        <div class="auth-wrap">
+            <div class="card auth-card" id="loginCard">
+                <div class="auth-logo"><i class="fas fa-book-open"></i></div>
+                <h2>Welcome Back!</h2>
+                <p>Login to access study notes</p>
+                <div class="input-group">
+                    <label>Gmail / Email</label>
+                    <input type="email" id="loginEmail" placeholder="you@gmail.com" autocomplete="email">
+                </div>
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" id="loginPassword" placeholder="Enter your password" autocomplete="current-password">
+                </div>
+                <button class="btn btn-block" id="loginBtn"><i class="fas fa-sign-in-alt"></i> Login</button>
+                <p class="auth-switch">New here? <a id="showRegister">Create an account</a></p>
+                <div class="auth-note"><i class="fas fa-lock"></i> Your account lets you access notes on any device — phone, tablet or computer.</div>
+            </div>
+
+            <div class="card auth-card" id="registerCard" style="display:none;">
+                <div class="auth-logo"><i class="fas fa-user-plus"></i></div>
+                <h2>Create Account</h2>
+                <p>Sign up with your Gmail</p>
+                <div class="input-group">
+                    <label>Full Name</label>
+                    <input type="text" id="regName" placeholder="e.g. Rahul Kumar" autocomplete="name">
+                </div>
+                <div class="input-group">
+                    <label>Gmail / Email</label>
+                    <input type="email" id="regEmail" placeholder="you@gmail.com" autocomplete="email">
+                </div>
+                <div class="input-group">
+                    <label>Create Password (min 6 characters)</label>
+                    <input type="password" id="regPassword" placeholder="Choose a password" autocomplete="new-password">
+                </div>
+                <button class="btn btn-block" id="registerBtn"><i class="fas fa-user-check"></i> Create Account</button>
+                <p class="auth-switch">Already have an account? <a id="showLogin">Login</a></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== HOME SCREEN ===== -->
+    <section class="screen" id="homeScreen">
+        <div class="home-hero">
+            <div class="hero-icon"><i class="fas fa-user-graduate"></i></div>
+            <h2 id="homeHeroGreet">Welcome!</h2>
+            <p id="homeHeroSub">Browse handwritten notes by course &amp; semester.</p>
+        </div>
+
+        <div class="stats-row">
+            <div class="stat-box"><div class="num" id="statTotalNotes">0</div><div class="label">Notes</div></div>
+            <div class="stat-box"><div class="num" id="statCourses">0</div><div class="label">Courses</div></div>
+            <div class="stat-box"><div class="num" id="statSemesters">0</div><div class="label">Semesters</div></div>
+        </div>
+
+        <div class="quick-link" id="quickBrowse">
+            <div class="ql-icon"><i class="fas fa-book-open"></i></div>
+            <div><h4>Browse Notes</h4><p>Explore by course &amp; semester</p></div>
+        </div>
+
+        <div class="quick-link" id="quickAdmin" style="display:none;">
+            <div class="ql-icon gold"><i class="fas fa-crown"></i></div>
+            <div><h4>Admin Panel</h4><p>Upload &amp; manage notes</p></div>
+        </div>
+
+        <div class="card" style="margin-top:1rem;">
+            <div class="screen-title" style="font-size:1.05rem;margin-bottom:0.5rem;"><i class="fas fa-heart"></i> Made with love</div>
+            <p style="font-size:0.85rem;color:#555;">Handwritten notes curated by <strong>Subham Sahu</strong> — BCA, BSc AI&amp;ML, BCS &amp; IT. Keep supporting!</p>
+        </div>
+    </section>
+
+    <!-- ===== NOTES SCREEN ===== -->
+    <section class="screen" id="notesScreen">
+        <div class="screen-title"><i class="fas fa-pen-fancy"></i> My Notes</div>
+        <p style="font-size:0.85rem;color:#777;margin-bottom:0.8rem;">Tap any note to view it full screen.</p>
+
+        <div class="course-tabs" id="courseTabs"></div>
+
+        <div class="filter-row">
+            <label><i class="fas fa-layer-group"></i> Semester:</label>
+            <select id="semesterFilter"><option value="All">All Semesters</option></select>
+        </div>
+
+        <div class="notes-grid" id="notesGrid">
+            <div class="loader"><i class="fas fa-spinner fa-spin"></i><p>Loading notes...</p></div>
+        </div>
+    </section>
+
+    <!-- ===== UPLOAD SCREEN (Admin only) ===== -->
+    <section class="screen" id="uploadScreen">
+        <div class="screen-title"><i class="fas fa-cloud-upload-alt"></i> Add Notes</div>
+        <p style="font-size:0.85rem;color:#777;margin-bottom:0.8rem;"><i class="fas fa-lock" style="color:#e67e22;"></i> Admin only — this section is visible only when you log in with your admin Gmail.</p>
+
+        <div class="card upload-card">
+            <h3 style="color:var(--navy);margin-bottom:0.3rem;font-size:1.05rem;"><i class="fas fa-pen-fancy"></i> Upload Handwritten Notes</h3>
+            <p style="font-size:0.8rem;color:var(--muted);margin-bottom:1rem;">Select images (JPG, PNG, WEBP) or PDF files.<br>⭐ <strong>Common (All Departments)</strong> shows your note for every course at once.</p>
+
+            <div class="upload-area" id="uploadArea">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <p><strong>Tap here</strong> or drag &amp; drop files</p>
+                <input type="file" id="fileInput" accept="image/*,application/pdf" multiple style="display:none">
+            </div>
+
+            <div id="fileList" class="file-list" style="display:none;"></div>
+
+            <div class="input-group">
+                <label>Title (optional)</label>
+                <input type="text" id="noteTitle" placeholder="e.g. Unit 1 — C Programming">
+            </div>
+
+            <div class="input-group">
+                <label>Subject Category</label>
+                <select id="noteCategory">
+                    <option value="Uncategorized">Subject Category</option>
+                    <option value="Programming">Programming</option>
+                    <option value="Mathematics">Mathematics</option>
+                    <option value="Physics">Physics</option>
+                    <option value="Chemistry">Chemistry</option>
+                    <option value="Biology">Biology</option>
+                    <option value="English">English</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label>Course</label>
+                <select id="noteCourse">
+                    <option value="">— Select Course —</option>
+                    <option value="Common">⭐ Common (All Departments)</option>
+                    <option value="BCA">BCA</option>
+                    <option value="BSc.AI&ML">BSc AI & ML</option>
+                    <option value="BCS">BCS</option>
+                    <option value="IT">IT</option>
+                    <option value="PYQ">PYQ</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label>Semester</label>
+                <select id="noteSemester">
+                    <option value="">— Select Semester —</option>
+                    <option value="1">Semester 1</option>
+                    <option value="2">Semester 2</option>
+                    <option value="3">Semester 3</option>
+                    <option value="4">Semester 4</option>
+                    <option value="5">Semester 5</option>
+                    <option value="6">Semester 6</option>
+                    <option value="7">Semester 7</option>
+                    <option value="8">Semester 8</option>
+                </select>
+            </div>
+
+            <button class="btn btn-block btn-gold" id="uploadBtn"><i class="fas fa-upload"></i> Add Notes</button>
+        </div>
+    </section>
+
+    <!-- ===== PROFILE SCREEN ===== -->
+    <section class="screen" id="profileScreen">
+        <div class="profile-header">
+            <div class="avatar" id="profileAvatar">?</div>
+            <h2 id="profileName">—</h2>
+            <p id="profileEmail">—</p>
+            <div class="admin-badge" id="adminBadge" style="display:none;"><i class="fas fa-crown"></i> Admin</div>
+        </div>
+
+        <div class="menu-list">
+            <div class="menu-item" id="menuAdmin" style="display:none;">
+                <i class="fas fa-crown"></i><span>Admin Panel</span><i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="menu-item logout" id="menuLogout">
+                <i class="fas fa-sign-out-alt"></i><span>Logout</span><i class="fas fa-chevron-right"></i>
+            </div>
+        </div>
+
+        <div class="card" style="margin-top:1.2rem;">
+            <p style="font-size:0.78rem;color:#888;text-align:center;">
+                <i class="fas fa-heart" style="color:#e74c3c;"></i> Built with dedication by Subham Sahu &copy; 2025
+            </p>
+        </div>
+    </section>
+
+    <!-- ===== Bottom Navigation ===== -->
+    <nav class="bottom-nav">
+        <div class="nav-item active" id="nav-home"><i class="fas fa-home"></i>Home</div>
+        <div class="nav-item" id="nav-notes"><i class="fas fa-book-open"></i>Notes</div>
+        <div class="nav-item" id="nav-upload" style="display:none;"><i class="fas fa-plus-circle"></i>Add</div>
+        <div class="nav-item" id="nav-profile"><i class="fas fa-user"></i>Profile</div>
+    </nav>
+
+    <!-- ===== Toast ===== -->
+    <div class="toast" id="toast"></div>
+
+    <!-- ===== Modal ===== -->
+    <div class="modal-overlay" id="modalOverlay">
+        <button class="modal-close" id="modalClose"><i class="fas fa-times"></i></button>
+        <div id="modalContent" style="width:100%;display:flex;justify-content:center;"></div>
+        <div class="modal-title" id="modalTitle"></div>
+    </div>
+
+<script src="/public/app.js"></script>
+</body>
+</html>
+

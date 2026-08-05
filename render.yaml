@@ -1,0 +1,25 @@
+# Render.com blueprint — deploy the Notes App with one click
+services:
+  - type: web
+    name: notes-app
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: NODE_VERSION
+        value: 20.17.0
+      - key: ADMIN_EMAIL
+        value: myselfsubhamkumar@gmail.com
+      - key: ADMIN_PASSWORD
+        value: admin@123
+      - key: DB_PATH
+        value: ./notes-app.db
+      - key: PORT
+        sync: false
+      # ==== SUPABASE (permanent cloud storage — REQUIRED for production) ====
+      - key: SUPABASE_URL
+        sync: false        # set in Render dashboard after creating Supabase
+      - key: SUPABASE_SERVICE_KEY
+        sync: false        # set in Render dashboard after creating Supabase
+

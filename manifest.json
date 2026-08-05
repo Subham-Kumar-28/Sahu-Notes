@@ -1,0 +1,32 @@
+{
+  "name": "SahuNotes",
+  "short_name": "SahuNotes",
+  "description": "SahuNotes — handwritten study notes by Subham Sahu — BCA, BSc AI&ML, BCS, IT.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#1a2a6c",
+  "theme_color": "#1a2a6c",
+  "icons": [
+    {
+      "src": "/public/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/public/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/public/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
+
