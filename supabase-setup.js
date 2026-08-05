@@ -13,7 +13,22 @@
 require('dotenv').config();
 const { createClient } = require('@supabase/supabase-js');
 
-const SUPABASE_URL = process.env.SUPABASE_URL || '';
+// ===== Sanitize the Supabase URL =====
+// The dashboard shows several URLs (Project URL, REST/GraphQL endpoints, etc.).
+// If the user accidentally pastes e.g. ".../rest/v1/" the client builds a broken
+// path → "Invalid path specified in request URL". Normalize to the bare project URL.
+function sanitizeSupabaseUrl(raw) {
+    if (!raw) return '';
+    let url = String(raw).trim();
+    if ((url.startsWith('"') && url.endsWith('"')) || (url.startsWith("'") && url.endsWith("'"))) {
+        url = url.slice(1, -1);
+    }
+    url = url.replace(/\/(?:rest|auth|storage|graphql)\/v\d+\/?/i, '');
+    url = url.replace(/\/+$/, '');
+    return url;
+}
+
+const SUPABASE_URL = sanitizeSupabaseUrl(process.env.SUPABASE_URL || '');
 const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_KEY || '';
 
 if (!SUPABASE_URL || !SUPABASE_SERVICE_KEY) {
