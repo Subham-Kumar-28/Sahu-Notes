@@ -1,7 +1,7 @@
 {
-  "name": "SahuNotes",
-  "short_name": "SahuNotes",
-  "description": "SahuNotes — handwritten study notes by Subham Sahu — BCA, BSc AI&ML, BCS, IT.",
+  "name": "MCR Notebook+",
+  "short_name": "MCR Notebook+",
+  "description": "MCR Notebook+ — handwritten study notes by Subham Sahu — BCA, BSc AI&ML, BCS, IT.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
