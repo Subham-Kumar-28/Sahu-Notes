@@ -1,5 +1,5 @@
 ============================================================
-📱 NOTES APP — Subham Sahu's Handwritten Notes Website + App
+📱 MCR Notebook+ — Subham Sahu's Handwritten Notes Website + App
 ============================================================
 
 WHAT THIS IS
