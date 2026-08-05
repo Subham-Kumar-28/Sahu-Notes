@@ -68,6 +68,27 @@ const upload = multer({
 // ===== Auth routes =====
 app.use('/api/auth', auth.router);
 
+// ===== API: Health / diagnostics (no auth) =====
+app.get('/api/health', (req, res) => {
+    res.json({
+        status: 'ok',
+        cloudMode: cloud.isConfigured(),
+        supabaseUrl: process.env.SUPABASE_URL ? sanitizeDisplay(process.env.SUPABASE_URL) : '(not set)',
+        adminEmail: ADMIN_EMAIL
+    });
+});
+
+// Helper to safely show the Supabase URL without leaking secrets
+function sanitizeDisplay(raw) {
+    if (!raw) return '(not set)';
+    try {
+        const parsed = new URL(String(raw).trim().replace(/^["']|["']$/g, ''));
+        return parsed.protocol + '//' + parsed.host;
+    } catch (e) {
+        return '(invalid URL format)';
+    }
+}
+
 // ===== Helper: seed admin in cloud (idempotent) =====
 async function seedAdminCloud() {
     if (!cloud.isConfigured()) return;
