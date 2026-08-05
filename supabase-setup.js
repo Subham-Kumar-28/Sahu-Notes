@@ -23,9 +23,14 @@ function sanitizeSupabaseUrl(raw) {
     if ((url.startsWith('"') && url.endsWith('"')) || (url.startsWith("'") && url.endsWith("'"))) {
         url = url.slice(1, -1);
     }
-    url = url.replace(/\/(?:rest|auth|storage|graphql)\/v\d+\/?/i, '');
-    url = url.replace(/\/+$/, '');
-    return url;
+    try {
+        const parsed = new URL(url);
+        return parsed.protocol + '//' + parsed.host;
+    } catch (e) {
+        url = url.replace(/\/(?:rest|auth|storage|graphql)\/v\d+\/?/i, '');
+        url = url.replace(/\/+$/, '');
+        return url;
+    }
 }
 
 const SUPABASE_URL = sanitizeSupabaseUrl(process.env.SUPABASE_URL || '');
